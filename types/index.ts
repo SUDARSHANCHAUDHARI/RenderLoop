@@ -24,3 +24,4 @@ export interface SketchMeta {
 }
 
 export type SortOption = 'a-z' | 'z-a' | 'newest' | 'popular'
+export type ViewMode = 'all' | 'favorites'

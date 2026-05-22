@@ -73,6 +73,20 @@ export default function Viewer({ sketch, onClose, onAddToPlaylist }: Props) {
               + Queue
             </button>
             <button
+              onClick={() => {
+                const canvas = document.querySelector('canvas')
+                if (!canvas) return
+                const a = document.createElement('a')
+                a.download = `${sketch.id}.png`
+                a.href = canvas.toDataURL('image/png')
+                a.click()
+              }}
+              title="Export frame as PNG"
+              className="text-[10px] tracking-[0.12em] px-3 py-1.5 border border-[#1a3a5c] text-[#3a6680] hover:border-[#00b4d8]/50 hover:text-[#00b4d8] uppercase transition-colors"
+            >
+              ↓ PNG
+            </button>
+            <button
               onClick={onClose}
               className="text-[10px] px-3 py-1.5 border border-[#1a3a5c] text-[#2a5070] hover:text-[#5a8ca8] transition-colors"
             >

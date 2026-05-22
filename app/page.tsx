@@ -9,10 +9,12 @@ import { useGallery } from '@/hooks/useGallery'
 import { useViewer } from '@/hooks/useViewer'
 import { usePlaylist, PLAYLIST_DURATION_MS } from '@/hooks/usePlaylist'
 import { useKeyboard } from '@/hooks/useKeyboard'
+import { useFavorites } from '@/hooks/useFavorites'
 import type { SketchMeta } from '@/types'
 
 export default function Home() {
-  const gallery = useGallery()
+  const { favorites, toggle: toggleFavorite, isFavorite } = useFavorites()
+  const gallery = useGallery(favorites)
   const viewer = useViewer()
   const playlist = usePlaylist()
   const [isPlaylistOpen, setIsPlaylistOpen] = useState(false)
@@ -22,22 +24,40 @@ export default function Home() {
     viewer.open(SKETCHES[idx])
   }, [viewer])
 
+  // Deep-link: sync URL ?spec=id with viewer
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const specId = params.get('spec')
+    if (specId) {
+      const found = SKETCHES.find(s => s.id === specId)
+      if (found) viewer.open(found)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    const url = new URL(window.location.href)
+    if (viewer.isOpen && viewer.current) {
+      url.searchParams.set('spec', viewer.current.id)
+    } else {
+      url.searchParams.delete('spec')
+    }
+    window.history.replaceState(null, '', url.toString())
+  }, [viewer.isOpen, viewer.current])
+
   const handleAddToPlaylist = useCallback((sketch: SketchMeta) => {
     playlist.add(sketch)
     setIsPlaylistOpen(true)
   }, [playlist])
 
-  // Playlist auto-advance: when playing, open current sketch and schedule next
+  // Playlist auto-advance
   useEffect(() => {
     if (!playlist.isPlaying || playlist.items.length === 0) return
-
     const current = playlist.items[playlist.index]
     if (current) viewer.open(current)
-
     const timer = setTimeout(() => {
       playlist.next(playlist.items.length)
     }, PLAYLIST_DURATION_MS)
-
     return () => clearTimeout(timer)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playlist.isPlaying, playlist.index, playlist.items.length])
@@ -75,12 +95,19 @@ export default function Home() {
         sort={gallery.sort}
         search={gallery.search}
         activeTag={gallery.activeTag}
+        activeAlgorithm={gallery.activeAlgorithm}
+        viewMode={gallery.viewMode}
         totalCount={SKETCHES.length}
+        favoritesCount={favorites.size}
         onSort={gallery.setSort}
         onSearch={gallery.setSearch}
         onTagToggle={gallery.toggleTag}
+        onAlgorithmToggle={gallery.toggleAlgorithm}
+        onViewModeToggle={() => gallery.setViewMode(gallery.viewMode === 'all' ? 'favorites' : 'all')}
         onOpen={viewer.open}
         onAddToPlaylist={handleAddToPlaylist}
+        onFavorite={toggleFavorite}
+        isFavorite={isFavorite}
         onSurprise={openRandom}
         onTogglePlaylist={() => setIsPlaylistOpen(p => !p)}
         playlistCount={playlist.items.length}
