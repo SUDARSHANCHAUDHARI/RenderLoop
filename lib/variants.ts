@@ -41,7 +41,7 @@ export const ALGORITHMS: AlgorithmDef[] = [
     tags: ['particles', 'noise', 'generative'],
     createdAt: '2024-03-15',
     baseViews: 3420,
-    variationCount: 12,
+    variationCount: 24,
     factory: createFlowFieldSketch,
   },
   {
@@ -51,7 +51,7 @@ export const ALGORITHMS: AlgorithmDef[] = [
     tags: ['geometry', 'symmetry', 'rotation'],
     createdAt: '2024-05-22',
     baseViews: 2184,
-    variationCount: 12,
+    variationCount: 24,
     factory: createMandalaSketch,
   },
   {
@@ -61,7 +61,7 @@ export const ALGORITHMS: AlgorithmDef[] = [
     tags: ['organic', 'blobs', 'blending'],
     createdAt: '2024-01-08',
     baseViews: 4052,
-    variationCount: 12,
+    variationCount: 24,
     factory: createMetaballsSketch,
   },
   {
@@ -71,7 +71,7 @@ export const ALGORITHMS: AlgorithmDef[] = [
     tags: ['waves', 'mathematics', 'oscillation'],
     createdAt: '2024-07-30',
     baseViews: 1876,
-    variationCount: 12,
+    variationCount: 24,
     factory: createWaveInterferenceSketch,
   },
   {
@@ -81,7 +81,7 @@ export const ALGORITHMS: AlgorithmDef[] = [
     tags: ['particles', 'minimal', 'network'],
     createdAt: '2024-09-14',
     baseViews: 2943,
-    variationCount: 12,
+    variationCount: 24,
     factory: createConstellationSketch,
   },
   {
@@ -91,7 +91,7 @@ export const ALGORITHMS: AlgorithmDef[] = [
     tags: ['fractal', 'recursion', 'nature'],
     createdAt: '2023-12-01',
     baseViews: 5210,
-    variationCount: 12,
+    variationCount: 24,
     factory: createFractalTreeSketch,
   },
   {
@@ -101,7 +101,7 @@ export const ALGORITHMS: AlgorithmDef[] = [
     tags: ['chaos', 'mathematics', 'attractor'],
     createdAt: '2024-02-14',
     baseViews: 3881,
-    variationCount: 12,
+    variationCount: 24,
     factory: createStrangeAttractorSketch,
   },
   {
@@ -111,7 +111,7 @@ export const ALGORITHMS: AlgorithmDef[] = [
     tags: ['simulation', 'agents', 'emergent'],
     createdAt: '2024-04-11',
     baseViews: 2760,
-    variationCount: 12,
+    variationCount: 24,
     factory: createBoidsSketch,
   },
   {
@@ -121,7 +121,7 @@ export const ALGORITHMS: AlgorithmDef[] = [
     tags: ['mathematics', 'oscillation', 'waves'],
     createdAt: '2024-06-03',
     baseViews: 1940,
-    variationCount: 12,
+    variationCount: 24,
     factory: createLissajousSketch,
   },
   {
@@ -131,7 +131,7 @@ export const ALGORITHMS: AlgorithmDef[] = [
     tags: ['geometry', 'tiling', 'generative'],
     createdAt: '2024-08-19',
     baseViews: 1588,
-    variationCount: 12,
+    variationCount: 24,
     factory: createTruchetSketch,
   },
   {
@@ -141,7 +141,7 @@ export const ALGORITHMS: AlgorithmDef[] = [
     tags: ['cellular', 'simulation', 'emergent'],
     createdAt: '2024-01-25',
     baseViews: 4320,
-    variationCount: 12,
+    variationCount: 24,
     factory: createGameOfLifeSketch,
   },
   {
@@ -151,7 +151,7 @@ export const ALGORITHMS: AlgorithmDef[] = [
     tags: ['geometry', 'mathematics', 'rotation'],
     createdAt: '2024-03-30',
     baseViews: 2115,
-    variationCount: 12,
+    variationCount: 24,
     factory: createSpirographSketch,
   },
   {
@@ -161,7 +161,7 @@ export const ALGORITHMS: AlgorithmDef[] = [
     tags: ['fractal', 'nature', 'recursion'],
     createdAt: '2024-05-07',
     baseViews: 1730,
-    variationCount: 12,
+    variationCount: 24,
     factory: createLSystemSketch,
   },
   {
@@ -171,7 +171,7 @@ export const ALGORITHMS: AlgorithmDef[] = [
     tags: ['noise', 'generative', 'organic'],
     createdAt: '2024-07-12',
     baseViews: 2290,
-    variationCount: 12,
+    variationCount: 24,
     factory: createPerlinMarbleSketch,
   },
   {
@@ -181,7 +181,7 @@ export const ALGORITHMS: AlgorithmDef[] = [
     tags: ['simulation', 'physics', 'minimal'],
     createdAt: '2024-09-28',
     baseViews: 1650,
-    variationCount: 12,
+    variationCount: 24,
     factory: createOrbitTrailsSketch,
   },
   {
@@ -191,7 +191,7 @@ export const ALGORITHMS: AlgorithmDef[] = [
     tags: ['simulation', 'cellular', 'particles'],
     createdAt: '2024-11-05',
     baseViews: 3140,
-    variationCount: 12,
+    variationCount: 24,
     factory: createSandSimulationSketch,
   },
   {
@@ -201,7 +201,7 @@ export const ALGORITHMS: AlgorithmDef[] = [
     tags: ['geometry', 'mathematics', 'minimal'],
     createdAt: '2024-02-28',
     baseViews: 2470,
-    variationCount: 12,
+    variationCount: 24,
     factory: createStringArtSketch,
   },
   {
@@ -211,7 +211,7 @@ export const ALGORITHMS: AlgorithmDef[] = [
     tags: ['oscillation', 'mathematics', 'physics'],
     createdAt: '2024-04-22',
     baseViews: 1980,
-    variationCount: 12,
+    variationCount: 24,
     factory: createHarmonographSketch,
   },
   {
@@ -221,7 +221,7 @@ export const ALGORITHMS: AlgorithmDef[] = [
     tags: ['symmetry', 'geometry', 'rotation'],
     createdAt: '2024-06-15',
     baseViews: 2830,
-    variationCount: 12,
+    variationCount: 24,
     factory: createKaleidoscopeSketch,
   },
   {
@@ -231,7 +231,7 @@ export const ALGORITHMS: AlgorithmDef[] = [
     tags: ['waves', 'noise', 'oscillation'],
     createdAt: '2024-08-03',
     baseViews: 1420,
-    variationCount: 12,
+    variationCount: 24,
     factory: createPlasmaSketch,
   },
   {
@@ -241,7 +241,7 @@ export const ALGORITHMS: AlgorithmDef[] = [
     tags: ['mathematics', 'waves', 'simulation'],
     createdAt: '2024-10-18',
     baseViews: 3560,
-    variationCount: 12,
+    variationCount: 24,
     factory: createEpicyclesSketch,
   },
   {
@@ -251,7 +251,7 @@ export const ALGORITHMS: AlgorithmDef[] = [
     tags: ['noise', 'particles', 'organic'],
     createdAt: '2024-12-01',
     baseViews: 2080,
-    variationCount: 12,
+    variationCount: 24,
     factory: createNoiseWormsSketch,
   },
 ]
