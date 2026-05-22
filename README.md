@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RenderLoop
 
-## Getting Started
+A generative art gallery with 264 parametric specs — 22 algorithms, each with 12 seeded variations.
 
-First, run the development server:
+Built as a creative coding study inspired by motionlab.cc, using an original Blueprint design system.
+
+## Stack
+
+- **Next.js 15** (App Router)
+- **TypeScript** (strict)
+- **Tailwind CSS v4**
+- **p5.js 2.2.3** — canvas sketches
+- **pnpm**
+
+## Features
+
+- 264 generative art specs (22 algorithms × 12 parametric variations)
+- Sorting: Date, Views, A→Z, Z→A
+- Tag filtering + search
+- Surprise Me — opens a random spec
+- Fullscreen viewer/player
+- Playlist queue with auto-advance and shuffle
+- Keyboard shortcuts: `P` playlist, `Esc` close, arrow keys skip
+
+## Algorithms
+
+Noise Flow Field · Geometric Mandala · Metaballs · Wave Interference · Constellation · Fractal Tree · Strange Attractor · Boids · Lissajous Curves · Truchet Tiles · Game of Life · Spirograph · L-System Plant · Perlin Marble · Orbit Trails · Sand Simulation · String Art · Harmonograph · Kaleidoscope · Sine Plasma · Epicycles · Noise Worms
+
+## Dev
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev --turbopack
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Author
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**SudarshanTechLabs** — [sunny.sudarshan@gmail.com](mailto:sunny.sudarshan@gmail.com)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## License
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
