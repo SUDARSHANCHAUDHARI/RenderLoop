@@ -1,7 +1,8 @@
 'use client'
 
 import { ALL_TAGS } from '@/lib/sketches'
-import type { SketchMeta, SortOption } from '@/types'
+import { ALGORITHMS } from '@/lib/variants'
+import type { SketchMeta, SortOption, ViewMode } from '@/types'
 import SketchCard from './SketchCard'
 
 interface Props {
@@ -9,12 +10,19 @@ interface Props {
   sort: SortOption
   search: string
   activeTag: string | null
+  activeAlgorithm: string | null
+  viewMode: ViewMode
   totalCount: number
+  favoritesCount: number
   onSort: (s: SortOption) => void
   onSearch: (q: string) => void
   onTagToggle: (tag: string) => void
+  onAlgorithmToggle: (id: string) => void
+  onViewModeToggle: () => void
   onOpen: (sketch: SketchMeta) => void
   onAddToPlaylist: (sketch: SketchMeta) => void
+  onFavorite: (id: string) => void
+  isFavorite: (id: string) => boolean
   onSurprise: () => void
   onTogglePlaylist: () => void
   playlistCount: number
@@ -33,10 +41,14 @@ function today() {
 }
 
 export default function Gallery({
-  sketches, sort, search, activeTag, totalCount,
-  onSort, onSearch, onTagToggle, onOpen, onAddToPlaylist,
+  sketches, sort, search, activeTag, activeAlgorithm, viewMode,
+  totalCount, favoritesCount,
+  onSort, onSearch, onTagToggle, onAlgorithmToggle, onViewModeToggle,
+  onOpen, onAddToPlaylist, onFavorite, isFavorite,
   onSurprise, onTogglePlaylist, playlistCount,
 }: Props) {
+  const hasActiveFilter = activeTag || activeAlgorithm
+
   return (
     <div className="min-h-screen">
 
@@ -101,10 +113,28 @@ export default function Gallery({
 
           <div className="h-4 w-px bg-[#1a3a5c] hidden sm:block" />
 
+          {/* Favorites toggle */}
+          <button
+            onClick={onViewModeToggle}
+            title="Favorites"
+            className={`relative text-[10px] tracking-[0.12em] px-3 py-1.5 border transition-colors uppercase ${
+              viewMode === 'favorites'
+                ? 'border-[#00b4d8]/60 text-[#00b4d8] bg-[#00b4d8]/5'
+                : 'border-[#1a3a5c] text-[#2a5070] hover:border-[#00b4d8]/40 hover:text-[#00b4d8]'
+            }`}
+          >
+            ♡ Saved
+            {favoritesCount > 0 && (
+              <span className="absolute -top-1.5 -right-1.5 bg-[#00b4d8] text-[#071220] text-[8px] w-3.5 h-3.5 flex items-center justify-center font-bold rounded-full">
+                {favoritesCount}
+              </span>
+            )}
+          </button>
+
           {/* Surprise */}
           <button
             onClick={onSurprise}
-            title="Random Spec — S"
+            title="Random Spec"
             className="text-[10px] tracking-[0.12em] px-3 py-1.5 border border-[#1a3a5c] text-[#2a5070] hover:border-[#00b4d8]/40 hover:text-[#00b4d8] transition-colors uppercase"
           >
             ⚡ Random
@@ -125,14 +155,14 @@ export default function Gallery({
           </button>
         </div>
 
-        {/* Tag divider */}
+        {/* Divider */}
         <div className="max-w-6xl mx-auto px-6">
           <div className="h-px bg-[#1a3a5c]" />
         </div>
 
         {/* Tag filters */}
         <div className="max-w-6xl mx-auto px-6 py-2 flex items-center gap-2 flex-wrap">
-          <span className="text-[9px] tracking-[0.25em] text-[#1a3a5c] uppercase mr-1">Filter ▸</span>
+          <span className="text-[9px] tracking-[0.25em] text-[#1a3a5c] uppercase mr-1">Tags ▸</span>
           {ALL_TAGS.map(tag => (
             <button
               key={tag}
@@ -146,9 +176,27 @@ export default function Gallery({
               #{tag}
             </button>
           ))}
-          {activeTag && (
+        </div>
+
+        {/* Algorithm family filter */}
+        <div className="max-w-6xl mx-auto px-6 pb-2 flex items-center gap-2 flex-wrap">
+          <span className="text-[9px] tracking-[0.25em] text-[#1a3a5c] uppercase mr-1">Family ▸</span>
+          {ALGORITHMS.map(alg => (
             <button
-              onClick={() => onTagToggle(activeTag)}
+              key={alg.id}
+              onClick={() => onAlgorithmToggle(alg.id)}
+              className={`text-[9px] tracking-[0.06em] px-2 py-0.5 border transition-colors ${
+                activeAlgorithm === alg.id
+                  ? 'border-[#00b4d8]/60 text-[#00b4d8] bg-[#00b4d8]/5'
+                  : 'border-[#1a3a5c] text-[#2a5070] hover:border-[#235080] hover:text-[#5a8ca8]'
+              }`}
+            >
+              {alg.title}
+            </button>
+          ))}
+          {hasActiveFilter && (
+            <button
+              onClick={() => { if (activeTag) onTagToggle(activeTag); if (activeAlgorithm) onAlgorithmToggle(activeAlgorithm) }}
               className="text-[9px] text-[#2a5070] hover:text-[#5a8ca8] transition-colors ml-1"
             >
               ✕ clear
@@ -162,10 +210,10 @@ export default function Gallery({
         {sketches.length === 0 ? (
           <div className="py-24 text-center">
             <p className="text-[10px] tracking-[0.25em] text-[#1a3a5c] uppercase">
-              No Specifications Found
+              {viewMode === 'favorites' ? 'No Saved Specs' : 'No Specifications Found'}
             </p>
             <p className="text-[9px] text-[#0f2440] mt-2">
-              Try adjusting search or filter
+              {viewMode === 'favorites' ? 'Heart a spec to save it' : 'Try adjusting search or filter'}
             </p>
           </div>
         ) : (
@@ -177,6 +225,8 @@ export default function Gallery({
                   index={i}
                   onOpen={onOpen}
                   onAddToPlaylist={onAddToPlaylist}
+                  onFavorite={onFavorite}
+                  isFavorite={isFavorite(sketch.id)}
                 />
               </div>
             ))}
@@ -191,7 +241,7 @@ export default function Gallery({
             RenderLoop — Generative Art Gallery
           </span>
           <span className="text-[9px] tracking-[0.12em] text-[#0f2440] uppercase hidden sm:block">
-            S: Random · P: Queue · Esc: Close · ←→: Navigate
+            P: Queue · Esc: Close · ←→: Navigate
           </span>
         </div>
       </footer>

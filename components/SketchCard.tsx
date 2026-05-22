@@ -8,6 +8,8 @@ interface Props {
   index: number
   onOpen: (sketch: SketchMeta) => void
   onAddToPlaylist: (sketch: SketchMeta) => void
+  onFavorite: (id: string) => void
+  isFavorite: boolean
 }
 
 const C = 'rgba(0,180,216,'
@@ -579,7 +581,7 @@ function fmtViews(n: number) {
 
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
-export default function SketchCard({ sketch, index, onOpen, onAddToPlaylist }: Props) {
+export default function SketchCard({ sketch, index, onOpen, onAddToPlaylist, onFavorite, isFavorite }: Props) {
   const algorithmId = sketch.algorithmId ?? sketch.id
   const Thumb = THUMB_MAP[algorithmId]
   const seed = sketch.params?.seed ?? (sketch.variationIndex ?? index) * 7919 + 42
@@ -603,6 +605,13 @@ export default function SketchCard({ sketch, index, onOpen, onAddToPlaylist }: P
         <span className="absolute top-2.5 left-3 text-[9px] tracking-[0.22em] text-[#1a3a5c] group-hover:text-[#00b4d8]/50 transition-colors select-none z-10">
           SPEC·{ref}
         </span>
+        <button
+          onClick={e => { e.stopPropagation(); onFavorite(sketch.id) }}
+          className={`absolute top-2 right-8 z-10 text-[12px] transition-colors ${isFavorite ? 'text-[#00b4d8]' : 'text-[#1a3a5c] hover:text-[#00b4d8]/60'}`}
+          title={isFavorite ? 'Remove from saved' : 'Save'}
+        >
+          {isFavorite ? '♥' : '♡'}
+        </button>
         <span className="absolute bottom-2.5 right-3 text-[9px] tracking-[0.15em] text-[#1a3a5c] select-none z-10 tabular-nums">
           {fmtViews(sketch.views)}
         </span>

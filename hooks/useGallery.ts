@@ -2,15 +2,21 @@
 
 import { useMemo, useState } from 'react'
 import { SKETCHES } from '@/lib/sketches'
-import type { SketchMeta, SortOption } from '@/types'
+import type { SketchMeta, SortOption, ViewMode } from '@/types'
 
-export function useGallery() {
+export function useGallery(favorites: Set<string>) {
   const [sort, setSort] = useState<SortOption>('newest')
   const [search, setSearch] = useState('')
   const [activeTag, setActiveTag] = useState<string | null>(null)
+  const [activeAlgorithm, setActiveAlgorithm] = useState<string | null>(null)
+  const [viewMode, setViewMode] = useState<ViewMode>('all')
 
   const sketches = useMemo<SketchMeta[]>(() => {
     let result = [...SKETCHES]
+
+    if (viewMode === 'favorites') {
+      result = result.filter(s => favorites.has(s.id))
+    }
 
     if (search.trim()) {
       const q = search.toLowerCase()
@@ -26,6 +32,10 @@ export function useGallery() {
       result = result.filter(s => s.tags.includes(activeTag))
     }
 
+    if (activeAlgorithm) {
+      result = result.filter(s => s.algorithmId === activeAlgorithm)
+    }
+
     switch (sort) {
       case 'a-z':
         return result.sort((a, b) => a.title.localeCompare(b.title))
@@ -39,9 +49,15 @@ export function useGallery() {
           (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         )
     }
-  }, [sort, search, activeTag])
+  }, [sort, search, activeTag, activeAlgorithm, viewMode, favorites])
 
   const toggleTag = (tag: string) => setActiveTag(prev => (prev === tag ? null : tag))
+  const toggleAlgorithm = (id: string) => setActiveAlgorithm(prev => (prev === id ? null : id))
 
-  return { sketches, sort, setSort, search, setSearch, activeTag, toggleTag }
+  return {
+    sketches, sort, setSort, search, setSearch,
+    activeTag, toggleTag,
+    activeAlgorithm, toggleAlgorithm,
+    viewMode, setViewMode,
+  }
 }
