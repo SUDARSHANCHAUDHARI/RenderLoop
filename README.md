@@ -6,10 +6,11 @@ Built as a creative coding study inspired by motionlab.cc, using an original Blu
 
 ## Stack
 
-- **Next.js 15** (App Router)
+- **Next.js 16** (App Router)
 - **TypeScript** (strict)
 - **Tailwind CSS v4**
 - **p5.js 2.2.3** — canvas sketches
+- **Vitest** — unit tests for the seeded RNG and parameter generators
 - **pnpm**
 
 ## Features
@@ -32,6 +33,29 @@ Noise Flow Field · Geometric Mandala · Metaballs · Wave Interference · Const
 pnpm install
 pnpm dev --turbopack
 ```
+
+## Scripts
+
+```bash
+pnpm dev          # dev server
+pnpm build        # production build
+pnpm lint         # ESLint (flat config, next/core-web-vitals)
+pnpm typecheck    # tsc --noEmit (strict)
+pnpm test         # Vitest unit tests
+```
+
+## Deployment
+
+RenderLoop is fully client-side — it renders generative art in the browser and
+needs **no API keys, backend, or environment variables**. Deploy the standard
+Next.js way:
+
+```bash
+vercel          # preview
+vercel --prod   # production
+```
+
+Vercel auto-detects Next.js, so no extra configuration is required.
 
 ## Author
 
