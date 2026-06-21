@@ -47,15 +47,11 @@ pnpm test         # Vitest unit tests
 ## Deployment
 
 RenderLoop is fully client-side — it renders generative art in the browser and
-needs **no API keys, backend, or environment variables**. Deploy the standard
-Next.js way:
+needs **no API keys, backend, or environment variables**.
 
-```bash
-vercel          # preview
-vercel --prod   # production
-```
-
-Vercel auto-detects Next.js, so no extra configuration is required.
+Deploy via `pnpm build` and serve the static `out/` (or the `.next/` Next runtime
+output) from your own domain — the same hosting flow you use for the rest of
+your portfolio. No platform-specific config required.
 
 ## Author
 

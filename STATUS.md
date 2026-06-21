@@ -39,4 +39,4 @@ Optional:
 
 ## Deployment
 
-Not yet deployed. **Zero-config Vercel** (`vercel --prod`) — no env vars required.
+Not yet deployed. Self-hosted on your own domain. Stock Next.js with no env vars — deploy via the same flow you use for your other apps.
