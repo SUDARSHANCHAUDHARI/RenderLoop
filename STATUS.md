@@ -79,3 +79,22 @@ Not yet deployed. Self-hosted on your own domain. Stock Next.js with no env vars
 - [ ] Live deployment (no env needed when ready)
 - [ ] More algorithms if you want a bigger gallery
 - [ ] Persistence of user favorites beyond `localStorage`
+
+## Categorized work remaining
+
+| Item | Effort | Bucket | Blocker | Priority |
+|------|--------|--------|---------|----------|
+| Live deploy to your domain | ~30m | 🔑 Needs hosting | hosting access only — no env vars, no API keys | P1 |
+| More algorithms | open-ended | 🟦 Pure code | none — add more files under `components/sketches/` and register in `lib/variants.ts` | P3 |
+| Server-side persistence for favorites | ~half day | 🟦 Pure code (+🔑 if hosted DB) | depends on your backend choice | P3 |
+
+## Release plan
+
+1. **Deploy:**
+   - `pnpm build` → produces `.next/` (Next runtime) or `pnpm next build && pnpm next export` if you want pure static
+   - Drop on your host (rsync to VPS, push to your static-site host, etc.)
+   - Confirm gallery loads + a sketch renders + playlist queue works
+2. **Tag release:** `gh release create v1.0.0 --title "RenderLoop v1.0.0 — 264 generative art specs"`
+
+### Deploy prerequisites
+**None.** Zero env vars. Fully client-side. Just need your hosting flow.
