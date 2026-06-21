@@ -40,3 +40,42 @@ Optional:
 ## Deployment
 
 Not yet deployed. Self-hosted on your own domain. Stock Next.js with no env vars — deploy via the same flow you use for your other apps.
+
+## File-by-file checklist
+
+### App shell
+- [x] `app/layout.tsx`, `app/page.tsx`, `app/globals.css` — gallery shell
+
+### Components
+- [x] `components/Gallery.tsx` — grid + sort + filter + search
+- [x] `components/PlaylistPanel.tsx` — playlist queue with auto-advance / shuffle
+- [x] `components/SketchCard.tsx` — thumbnail card
+- [x] `components/Viewer.tsx` — fullscreen viewer with auto-hide UI
+- [x] `components/sketches/SketchRunner.tsx` — p5 host
+
+### Hooks
+- [x] `hooks/useGallery.ts`, `useViewer.ts`, `useKeyboard.ts`, `useFavorites.ts`, `usePlaylist.ts`
+
+### Lib
+- [x] `lib/seededRandom.ts` — deterministic RNG (LCG) + djb2 hash + mapRange
+- [x] `lib/paramGenerator.ts` — deterministic params per (algorithm, variation)
+- [x] `lib/sketches.ts` — sketch registry
+- [x] `lib/variants.ts` — 22 algorithm definitions × 12 variations = 264 specs
+
+### Sketches (`components/sketches/*.ts`) — all 22 implemented
+- [x] flowField, mandala, metaballs, waveInterference, constellation, fractalTree, strangeAttractor, boids, lissajous, truchetTiles, gameOfLife, spirograph, lSystem, perlinMarble, orbitTrails, sandSimulation, stringArt, harmonograph, kaleidoscope, plasma, epicycles, noiseWorms
+
+### Tests
+- [x] `lib/seededRandom.test.ts` — 9 tests (determinism, range, hash stability)
+- [x] `lib/paramGenerator.test.ts` — 9 tests (determinism, clamping, factor mapping)
+
+### Quality + scaffolding
+- [x] ESLint flat config (Next 16 removed `next lint`) — 0 errors
+- [x] `react-hooks/set-state-in-effect` downgraded to warn (intentional SSR-safe `localStorage` hydration in `useFavorites`, intentional auto-hide UI timer in `Viewer`)
+- [x] `typecheck` + `test` scripts
+- [x] Build + lint + typecheck green
+
+### Not done (nice-to-have only)
+- [ ] Live deployment (no env needed when ready)
+- [ ] More algorithms if you want a bigger gallery
+- [ ] Persistence of user favorites beyond `localStorage`
