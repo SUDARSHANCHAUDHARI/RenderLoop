@@ -55,7 +55,7 @@ your portfolio. No platform-specific config required.
 
 ## Author
 
-**SudarshanTechLabs** — [sunny.sudarshan@gmail.com](mailto:sunny.sudarshan@gmail.com)
+Built by **Sudarshan Chaudhari** — SudarshanTechLabs.
 
 ## License
 
