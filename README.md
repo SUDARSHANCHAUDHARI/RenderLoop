@@ -49,9 +49,9 @@ pnpm test         # Vitest unit tests
 RenderLoop is fully client-side — it renders generative art in the browser and
 needs **no API keys, backend, or environment variables**.
 
-Deploy via `pnpm build` and serve the static `out/` (or the `.next/` Next runtime
-output) from your own domain — the same hosting flow you use for the rest of
-your portfolio. No platform-specific config required.
+It's a static export (`output: "export"`): `npx next build` produces `out/`,
+served as-is. Deployed on **Cloudflare Pages** at
+`renderloop.sudarshantechlabs.com`.
 
 ## Author
 
