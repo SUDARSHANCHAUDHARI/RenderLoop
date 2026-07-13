@@ -49,3 +49,5 @@ next-env.d.ts
 *.swo
 secrets.*
 credentials.*
+
+repoguard-results/
